@@ -1,5 +1,9 @@
+const db = require('../../data/db-config')
+
 const getAll = () => {
   // DO YOUR MAGIC
+  const result = db('accounts')
+  return result
 }
 
 const getById = id => {
@@ -17,6 +21,8 @@ const updateById = (id, account) => {
 const deleteById = id => {
   // DO YOUR MAGIC
 }
+
+
 
 module.exports = {
   getAll,
