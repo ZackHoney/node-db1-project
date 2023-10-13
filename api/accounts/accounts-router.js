@@ -23,8 +23,8 @@ checkAccountNameUnique,
 async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-    const account = await Account.create(req.body)
-    res.json(account)
+    const newAccount = await Account.create(req.body)
+    res.status(201).json(newAccount)
   }catch(err) {
     next(err)
   }
