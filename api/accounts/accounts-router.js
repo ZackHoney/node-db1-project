@@ -6,23 +6,15 @@ const { checkAccountId, checkAccountNameUnique, checkAccountPayload} = require('
 router.get('/', async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-    const data = await Account.getAll()
-    res.json(data)
-  } catch(err) {
-    next({ status: 422, message: 'something wrong happened in the get request!'})
-  }
-})
-
-router.get('/:id', 
-checkAccountId, 
-async (req, res, next) => {
-  // DO YOUR MAGIC
-  try {
-    const data = await Account.getById(req.params.id)
-    res.json(data)
+    const accounts = await Account.getAll()
+    res.json(accounts)
   } catch(err) {
     next(err)
   }
+})
+
+router.get('/:id', checkAccountId, async (req, res, next) => {// eslint-disable-line
+  res.json(req.account) 
 })
 
 router.post('/', 
@@ -31,8 +23,8 @@ checkAccountNameUnique,
 async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-    const data = await Account.create(req.body)
-    res.json(data)
+    const account = await Account.create(req.body)
+    res.json(account)
   }catch(err) {
     next(err)
   }
@@ -45,8 +37,8 @@ checkAccountNameUnique,
 async (req, res, next) => {
   // DO YOUR MAGIC
   try{
-    const data = await Account.updateById(req.params.id, req.body)
-    res.json(data)
+    const account = await Account.updateById(req.params.id, req.body)
+    res.json(account)
   }catch(err) {
     next(err)
   }
@@ -57,8 +49,8 @@ router.delete('/:id',
   async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-    const data = Account.deleteById(req.params.id)
-    res.json(data)
+    const account = Account.deleteById(req.params.id)
+    res.json(account)
   }catch(err) {
     next(err)
   }
