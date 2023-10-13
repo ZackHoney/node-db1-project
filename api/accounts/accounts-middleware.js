@@ -5,7 +5,7 @@ exports.checkAccountPayload = (req, res, next) => {
   // Note: you can either write "manual" validation logic
   // or use the Yup library (not currently installed)
  if(!req.body.name || !req.body.budget) {
-  next({ status: 422, message: 'name and budget are required'})
+  next({ status: 400, message: 'name and budget are required'})
  } else {
   next()
  }
@@ -14,9 +14,9 @@ exports.checkAccountPayload = (req, res, next) => {
 
 exports.checkAccountNameUnique = (req, res, next) => {
   // DO YOUR MAGIC
-  const account = db('accounts').where('name', req.body.name)
+  const account = db('accounts').where('name', req.body.name.trim())
   if(!account) {
-    next({ status:404, message: 'name must be unique'})
+    next({ status:400, message: 'that name is taken'})
   } else {
     next()
   }
