@@ -38,8 +38,8 @@ checkAccountId,
 checkAccountPayload, 
 async (req, res, next) => {
   // DO YOUR MAGIC
-  const updated = await Account.updateById(req.params.id, req.body)
-  try{  
+  try{ 
+    const updated = await Account.updateById(req.params.id, req.body) 
     res.status(200).json(updated)
   }catch(err) {
     next(err)
